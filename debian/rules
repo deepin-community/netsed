@@ -1,4 +1,22 @@
 #!/usr/bin/make -f
+# -*- makefile -*-
+
+# debian/rules for netsed by Mats Erik Andersson and
+# Arno Töll <debian@toell.net>.
+
+# Uncomment this to turn on verbose mode.
+# export DH_VERBOSE=1
+
+pkg = netsed
+
+DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_BUILD_MAINT_OPTIONS
 
 %:
 	dh $@
+
+override_dh_auto_install:
+	install $(pkg) debian/$(pkg)/usr/bin
+
+override_dh_installchangelogs:
+	dh_installchangelogs NEWS
